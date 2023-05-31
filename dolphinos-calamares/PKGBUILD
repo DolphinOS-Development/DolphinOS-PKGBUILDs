@@ -15,7 +15,7 @@ depends=('kconfig' 'kcoreaddons' 'kiconthemes' 'ki18n' 'kio' 'solid' 'yaml-cpp' 
          'boost-libs' 'hwinfo' 'qt5-svg' 'polkit-qt5' 'gtk-update-icon-cache' 'plasma-framework'
          'qt5-xmlpatterns' 'squashfs-tools' 'libpwquality' 'appstream-qt') # 'pythonqt>=3.2')
 optdepends=('ckbcomp')
-makedepends=('extra-cmake-modules' 'qt5-tools' 'qt5-translations' 'git' 'boost' 'python')
+makedepends=('ninja' 'extra-cmake-modules' 'qt5-tools' 'qt5-translations' 'git' 'boost' 'python')
 
 source=(
 	"git+https://github.com/DolphinLNXOS/DolphinOS-calamares.git"
