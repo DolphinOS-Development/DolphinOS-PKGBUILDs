@@ -1,6 +1,8 @@
 # Maintainer: JesusXD88
 
 pkgname=dolphinos-calamares
+pkgver=3.2.62
+pkgrel=1
 pkgdesc='Distribution-independent installer framework (development version)'
 _repo_name=DolphinOS-calamares
 arch=('i686' 'x86_64')
@@ -38,7 +40,7 @@ prepare() {
 
 
 build() {
-	cd ${srcdir}/${_repo_name}
+	cd ${srcdir}/${_repo_name}Z
 
         _cpuCount=$(grep -c -w ^processor /proc/cpuinfo)
 

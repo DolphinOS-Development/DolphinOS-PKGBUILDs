@@ -1,6 +1,9 @@
 # Maintainer: JesusXD88
 
 pkgname=dolphinos-calamares-configs
+pkgdesc="Configs for DolphinOS-Calamares Installer"
+pkgver=0.1
+pkgrel=1
 _repo_name=DolphinOS-calamares-configs
 url="https://github.com/DolphinOS-Development/${_repo_name}.git"
 pkgdesc='DolphinOS calamares configuration files and branding'
