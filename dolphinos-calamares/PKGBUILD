@@ -40,7 +40,7 @@ prepare() {
 
 
 build() {
-	cd ${srcdir}/${_repo_name}Z
+	cd ${srcdir}/${_repo_name}
 
         _cpuCount=$(grep -c -w ^processor /proc/cpuinfo)
 
