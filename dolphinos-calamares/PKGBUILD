@@ -33,12 +33,9 @@ prepare() {
 build() {
 	cd ${srcdir}/DolphinOS-calamares
 
-	mkdir -p build
-	cd build
-
         _cpuCount=$(grep -c -w ^processor /proc/cpuinfo)
 
-        cmake -S .. -Bbuild \
+        cmake -S . -Bbuild \
               -GNinja \
               -DCMAKE_BUILD_TYPE=Release \
               -DCMAKE_INSTALL_PREFIX=/usr \
@@ -47,10 +44,10 @@ build() {
               -DBoost_NO_BOOST_CMAKE=ON \
               -DSKIP_MODULES="dummyprocess dummypython dummycpp \
                               dummypythonqt services-openrc"      
-        cmake --build . --parallel $_cpuCount
+        cmake --build build --parallel $_cpuCount
 }
 
 package() {
 	cd ${srcdir}/DolphinOS-calamares/build
-	make DESTDIR="$pkgdir" install
+	DESTDIR="${pkgdir}" cmake --build . --target install     
 }
