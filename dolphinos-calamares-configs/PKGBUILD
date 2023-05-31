@@ -1,9 +1,6 @@
 # Maintainer: JesusXD88
 
-pkgname=calamares_config_default
-pkgver=0.1
-pkgrel=2
-epoch=1
+pkgname=dolphinos-calamares-configs
 _repo_name=DolphinOS-calamares-configs
 url="https://github.com/DolphinOS-Development/${_repo_name}.git"
 pkgdesc='DolphinOS calamares configuration files and branding'
@@ -15,6 +12,14 @@ makedepends=('git')
 sha256sums=('SKIP')
 
 _date=$(date +%Y.%m.%d)
+
+pkgver() {
+    cd "${srcdir}/${_repo_name}"
+    ( set -o pipefail
+    git describe --long --abbrev=7 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
+    )
+}
 
 prepare() {
     # set date for calamares_branding

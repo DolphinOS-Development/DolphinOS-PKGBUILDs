@@ -1,12 +1,11 @@
 # Maintainer: JesusXD88
 
 pkgname=dolphinos-calamares
-pkgver=3.2.62
-pkgrel=1
 pkgdesc='Distribution-independent installer framework (development version)'
+_repo_name=DolphinOS-calamares
 arch=('i686' 'x86_64')
 license=(GPL)
-url="https://github.com/DolphinOS-Development/DolphinOS-calamares.git"
+url="https://github.com/DolphinOS-Development/${_repo_name}.git"
 license=('LGPL')
 conflicts=('calamares' 'calamares-dev')
 provides=('calamares' 'calamares-dev')
@@ -18,20 +17,28 @@ optdepends=('ckbcomp')
 makedepends=('ninja' 'extra-cmake-modules' 'qt5-tools' 'qt5-translations' 'git' 'boost' 'python')
 
 source=(
-	"git+https://github.com/DolphinLNXOS/DolphinOS-calamares.git"
+	"git+https://github.com/DolphinLNXOS/${_repo_name}.git"
 )
 sha256sums=(
 	'SKIP'
 )
 
+pkgver() {
+    cd "${srcdir}/${_repo_name}"
+    ( set -o pipefail
+    git describe --long --abbrev=7 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
+    )
+}
+
 prepare() {
-	cd ${srcdir}/DolphinOS-calamares
+	cd ${srcdir}/${_repo_name}
 	sed -i -e 's/"Install configuration files" OFF/"Install configuration files" ON/' CMakeLists.txt
 }
 
 
 build() {
-	cd ${srcdir}/DolphinOS-calamares
+	cd ${srcdir}/${_repo_name}
 
         _cpuCount=$(grep -c -w ^processor /proc/cpuinfo)
 
