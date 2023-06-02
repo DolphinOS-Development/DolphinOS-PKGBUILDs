@@ -23,9 +23,11 @@ source=(
     "49-nopassword-calamares.rules"
     ".zprofile"
     ".xinitrc"
+    ".Xauthority"
 )
 sha256sums=(
 	'SKIP'
+    'SKIP'
     'SKIP'
     'SKIP'
     'SKIP'
