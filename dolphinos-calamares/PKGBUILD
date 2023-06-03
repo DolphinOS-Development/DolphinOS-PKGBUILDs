@@ -22,14 +22,9 @@ source=(
 	"git+https://github.com/DolphinLNXOS/${_repo_name}.git"
     "49-nopassword-calamares.rules"
     ".zprofile"
-    ".xinitrc"
-    ".Xauthority"
 )
 sha256sums=(
 	'SKIP'
-    'SKIP'
-    'SKIP'
-    'SKIP'
     'SKIP'
 )
 
