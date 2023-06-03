@@ -63,6 +63,4 @@ package() {
 	DESTDIR="${pkgdir}" cmake --build . --target install
     install -Dm644 "${srcdir}/49-nopassword-calamares.rules" "${pkgdir}/etc/polkit-1/rules.d/49-nopassword-calamares.rules"
     chmod 750 "${pkgdir}/etc/polkit-1/rules.d"
-    install -Dm644 "${srcdir}/.xinitrc" "${pkgdir}/root/.xinitrc"      
-    install -Dm644 "${srcdir}/.zprofile" "${pkgdir}/root/.zprofile"
 }   
