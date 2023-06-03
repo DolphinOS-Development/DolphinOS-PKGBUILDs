@@ -21,7 +21,6 @@ makedepends=('ninja' 'extra-cmake-modules' 'qt5-tools' 'qt5-translations' 'git' 
 source=(
 	"git+https://github.com/DolphinLNXOS/${_repo_name}.git"
     "49-nopassword-calamares.rules"
-    ".zprofile"
 )
 sha256sums=(
 	'SKIP'
