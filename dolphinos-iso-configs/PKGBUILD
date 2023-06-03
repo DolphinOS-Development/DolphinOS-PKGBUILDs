@@ -26,5 +26,6 @@ pkgver() {
 
 package() {
     install -dm 600 "$pkgdir/root"
+    ls "$srcdir/${_repo_name}/root/*"
     cp -r --no-preserve=ownership "$srcdir/${_repo_name}/root/*" "$pkgdir/root"
 }
