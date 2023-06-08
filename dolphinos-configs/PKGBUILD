@@ -1,0 +1,31 @@
+# Maintainer: JesusXD88
+
+pkgname=dolphinos-configs
+pkgver=0.1
+pkgrel=1
+_repo_name=DolphinOS-configs
+url="https://github.com/DolphinOS-Development/${_repo_name}.git"
+pkgdesc='DolphinOS configuration files'
+arch=('any')
+license=('GPL3')
+source=("git+$url")
+makedepends=('git')
+
+sha256sums=('SKIP')
+
+_date=$(date +%Y.%m.%d)
+
+pkgver() {
+    cd "${srcdir}/${_repo_name}"
+    ( set -o pipefail
+    git describe --long --abbrev=7 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
+    )
+}
+
+package() {
+    install -dm 755 "$pkgdir/etc/pacman.d/hooks"
+    cp --no-preserve=ownership "$srcdir/${_repo_name}/etc/pacman.d/hooks/zz-snap-pac-grub-post.hook" "$pkgdir/etc/pacman.d/hooks/zz-snap-pac-grub-post.hook"
+    install -dm 755 "$pkgdir/usr/share/libalpm/scripts/grub-mkconfig"
+    cp --no-preserve=ownership "$srcdir/${_repo_name}/usr/share/libalpm/scripts/grub-mkconfig" "$pkgdir/usr/share/libalpm/scripts/grub-mkconfig"
+}

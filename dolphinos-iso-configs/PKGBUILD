@@ -1,7 +1,6 @@
 # Maintainer: JesusXD88
 
 pkgname=dolphinos-iso-configs
-pkgdesc="Configs for DolphinOS ISO Installer"
 pkgver=0.1
 pkgrel=1
 _repo_name=DolphinOS-ISO-configs
