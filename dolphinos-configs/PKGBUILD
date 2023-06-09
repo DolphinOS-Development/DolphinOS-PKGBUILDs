@@ -25,7 +25,7 @@ pkgver() {
 
 package() {
     install -dm 755 "$pkgdir/etc/pacman.d/hooks"
-    cp --no-preserve=ownership "$srcdir/${_repo_name}/etc/pacman.d/hooks/zz-snap-pac-grub-post.hook" "$pkgdir/etc/pacman.d/hooks/zz-snap-pac-grub-post.hook"
+    cp -r --no-preserve=ownership "$srcdir/${_repo_name}/etc/pacman.d/hooks/*" "$pkgdir/etc/pacman.d/hooks"
     install -dm 755 "$pkgdir/usr/share/libalpm/scripts"
     cp --no-preserve=ownership "$srcdir/${_repo_name}/usr/share/libalpm/scripts/grub-mkconfig" "$pkgdir/usr/share/libalpm/scripts/grub-mkconfig"
     chmod +x "$pkgdir/usr/share/libalpm/scripts/grub-mkconfig"
