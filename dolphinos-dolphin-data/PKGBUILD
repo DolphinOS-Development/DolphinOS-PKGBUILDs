@@ -32,7 +32,7 @@ pkgver() {
 
 package() {
     install -dm755 "$pkgdir/home/dolphinos/.local/share/dolphin-emu"
-    chmod -R 1000:1000 "$pkgdir/home/dolphinos/.local"
+    chown -R 1000:1000 "$pkgdir/home/dolphinos/.local"
     cp -r --no-preserve=ownership "${srcdir}/${_repo_name}/data/system.tar.gz.enc" "$pkgdir/home/dolphinos/.local/share/dolphin-emu"
     cp --no-preserve=ownership "${srcdir}/dec.bin" "$pkgdir/home/dolphinos/.local/share/dolphin-emu"
 }
