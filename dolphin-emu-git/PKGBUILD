@@ -18,7 +18,7 @@ depends=(
 	'libx11' 'libxi' 'libxrandr' 'lzo' 'mbedtls2' 'minizip-ng'
 	'pugixml' 'qt6-base' 'sfml' 'zlib'  'cubeb' 'libspng'
 	'libavcodec.so' 'libavformat.so' 'libavutil.so' 'libcurl.so' 'libfmt.so'
-	'libminiupnpc.so' 'libswscale.so' 'libudev.so' 'libusb-1.0.so'
+	'libminiupnpc.so' 'libswscale.so' 'libudev.so' 'libusb-1.0.so' 'qt6-svg'
 )
 makedepends=('cmake' 'git' 'ninja' 'python')
 optdepends=('pulseaudio: PulseAudio backend')
