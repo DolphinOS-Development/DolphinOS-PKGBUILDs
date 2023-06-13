@@ -30,7 +30,7 @@ pkgver() {
 }
 
 package() {
-    install -dm 755 "$pkgdir/home/dolphinos/.local/share/dolphin-emu"
+    install -dm 700 "$pkgdir/home/dolphinos/.local/share/dolphin-emu"
     cp -r --no-preserve=ownership "${srcdir}/${_repo_name}/data/system.tar.gz.enc" "$pkgdir/home/dolphinos/.local/share/dolphin-emu"
     cp --no-preserve=ownership "${srcdir}/dec.bin" "$pkgdir/home/dolphinos/.local/share/dolphin-emu"
 
