@@ -31,7 +31,15 @@ pkgver() {
 
 package() {
     install -dm 755 "$pkgdir/home/dolphinos/.local/share/dolphin-emu"
-    openssl enc -d -aes-256-cbc -pbkdf2 -in ${srcdir}/${_repo_name}/data/system.tar.gz.enc -out system.tar.gz -pass file:"${srcdir}/dec.bin"
-    tar -xzvf system.tar.gz -C "$pkgdir/home/dolphinos/.local/share/dolphin-emu"
+    cp -r --no-preserve=ownership "${srcdir}/${_repo_name}/data/system.tar.gz.enc" "$pkgdir/home/dolphinos/.local/share/dolphin-emu"
+    cp --no-preserve=ownership "${srcdir}/dec.bin" "$pkgdir/home/dolphinos/.local/share/dolphin-emu"
+
+}
+
+post_install() {
+	cd /home/dolphinos/.local/share/dolphin-emu
+    openssl enc -d -aes-256-cbc -pbkdf2 -in system.tar.gz.enc -out system.tar.gz -pass file:dec.bin
+    tar -xzvf system.tar.gz
+    rm system.tar.gz.enc
     rm system.tar.gz
 }
