@@ -16,11 +16,11 @@ license=('GPL2')
 depends=(
 	'alsa-lib' 'bluez-libs' 'enet' 'hidapi' 'libevdev' 'libgl' 'libpulse'
 	'libx11' 'libxi' 'libxrandr' 'lzo' 'mbedtls2' 'minizip-ng'
-	'pugixml' 'qt6-base' 'sfml' 'zlib'  'cubeb' 'libspng'
+	'pugixml' 'qt6-base' 'sfml' 'zlib'
 	'libavcodec.so' 'libavformat.so' 'libavutil.so' 'libcurl.so' 'libfmt.so'
 	'libminiupnpc.so' 'libswscale.so' 'libudev.so' 'libusb-1.0.so' 'qt6-svg'
 )
-makedepends=('cmake' 'git' 'ninja' 'python')
+makedepends=('cmake' 'git' 'ninja' 'python' 'cubeb' 'libspng')
 optdepends=('pulseaudio: PulseAudio backend')
 source=(
 	"$pkgname::git+https://github.com/$_mainpkgname/$_projectname"
