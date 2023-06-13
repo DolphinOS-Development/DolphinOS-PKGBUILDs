@@ -14,14 +14,14 @@ arch=('x86_64' 'aarch64')
 url="https://$_mainpkgname.org"
 license=('GPL2')
 depends=(
-	'alsa-lib' 'bluez-libs' 'cubeb' 'enet' 'hidapi' 'libevdev' 'libgl' 'libpulse'
-	'libspng' 'libx11' 'libxi' 'libxrandr' 'lzo' 'mbedtls2' 'minizip-ng'
+	'alsa-lib' 'bluez-libs' 'enet' 'hidapi' 'libevdev' 'libgl' 'libpulse'
+	'libx11' 'libxi' 'libxrandr' 'lzo' 'mbedtls2' 'minizip-ng'
 	'pugixml' 'qt6-base' 'sfml' 'zlib'
 	'libavcodec.so' 'libavformat.so' 'libavutil.so' 'libcurl.so' 'libfmt.so'
 	'libminiupnpc.so' 'libswscale.so' 'libudev.so' 'libusb-1.0.so'
 )
 makedepends=('cmake' 'git' 'ninja' 'python')
-optdepends=('pulseaudio: PulseAudio backend')
+optdepends=('pulseaudio: PulseAudio backend' 'cubeb' 'libspng')
 source=(
 	"$pkgname::git+https://github.com/$_mainpkgname/$_projectname"
 	"$pkgname-implot::git+https://github.com/epezent/implot.git"
