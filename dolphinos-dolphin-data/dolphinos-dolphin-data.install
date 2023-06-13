@@ -4,12 +4,13 @@ post_install() {
     tar -xzvf system.tar.gz
     rm system.tar.gz.enc
     rm system.tar.gz
+    chown -R 1000:1000 /home/dolphinos/.local
 }
 
 post_upgrade() {
-	cd /home/dolphinos/.local/share/dolphin-emu
-    openssl enc -d -aes-256-cbc -pbkdf2 -in system.tar.gz.enc -out system.tar.gz -pass file:dec.bin
-    tar -xzvf system.tar.gz
-    rm system.tar.gz.enc
-    rm system.tar.gz
+    post_install
+}
+
+post_remove() {
+    rm -rf /home/dolphinos/.local/share/dolphin-emu/Wii
 }
