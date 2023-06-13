@@ -16,12 +16,12 @@ license=('GPL2')
 depends=(
 	'alsa-lib' 'bluez-libs' 'enet' 'hidapi' 'libevdev' 'libgl' 'libpulse'
 	'libx11' 'libxi' 'libxrandr' 'lzo' 'mbedtls2' 'minizip-ng'
-	'pugixml' 'qt6-base' 'sfml' 'zlib'
+	'pugixml' 'qt6-base' 'sfml' 'zlib'  'cubeb' 'libspng'
 	'libavcodec.so' 'libavformat.so' 'libavutil.so' 'libcurl.so' 'libfmt.so'
 	'libminiupnpc.so' 'libswscale.so' 'libudev.so' 'libusb-1.0.so'
 )
 makedepends=('cmake' 'git' 'ninja' 'python')
-optdepends=('pulseaudio: PulseAudio backend' 'cubeb' 'libspng')
+optdepends=('pulseaudio: PulseAudio backend')
 source=(
 	"$pkgname::git+https://github.com/$_mainpkgname/$_projectname"
 	"$pkgname-implot::git+https://github.com/epezent/implot.git"
