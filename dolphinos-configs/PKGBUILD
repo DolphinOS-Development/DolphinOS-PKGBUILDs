@@ -8,6 +8,7 @@ url="https://github.com/DolphinOS-Development/${_repo_name}.git"
 pkgdesc='DolphinOS configuration files'
 arch=('any')
 license=('GPL3')
+install=$pkgname.install
 source=("git+$url")
 makedepends=('git')
 
