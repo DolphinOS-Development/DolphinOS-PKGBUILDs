@@ -35,4 +35,7 @@ package() {
     chown -R 1000:1000 "$pkgdir/home/dolphinos/.local"
     cp -r --no-preserve=ownership "${srcdir}/${_repo_name}/data/system.tar.gz.enc" "$pkgdir/home/dolphinos/.local/share/dolphin-emu"
     cp --no-preserve=ownership "${srcdir}/dec.bin" "$pkgdir/home/dolphinos/.local/share/dolphin-emu"
+    install -dm755 "$pkgdir/home/dolphinos/.config/dolphin-emu"
+    cp -r --no-preserve=ownership "${srcdir}/${_repo_name}/config/dolphin-emu" "$pkgdir/home/dolphinos/.config/dolphin-emu"
+    chown -R 1000:1000 "$pkgdir/home/dolphinos/.config/dolphin-emu"
 }
