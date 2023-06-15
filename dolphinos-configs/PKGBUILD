@@ -23,7 +23,7 @@ pkgver() {
     )
 }
 
-backup=("/home/dolphinos/.bash_profile")
+backup=("home/dolphinos/.bash_profile")
 
 package() {
     install -dm755 "$pkgdir/etc/pacman.d/hooks"
