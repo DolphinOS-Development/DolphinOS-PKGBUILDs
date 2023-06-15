@@ -35,5 +35,5 @@ package() {
     cp --no-preserve=ownership "$srcdir/${_repo_name}/etc/systemd/system/getty@tty1.service.d/skip-prompt.conf" "$pkgdir/etc/systemd/system/getty@tty1.service.d/skip-prompt.conf"
     install -dm700 "$pkgdir/home/dolphinos"
     cp -r --no-preserve=ownership "$srcdir/${_repo_name}/home/dolphinos" "$pkgdir/home/dolphinos"
-    chown -R 1000:1000 /home/dolphinos
+    chown -R 1000:1000 "$pkgdir/home/dolphinos"
 }
