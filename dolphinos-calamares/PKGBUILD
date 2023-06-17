@@ -4,10 +4,10 @@ pkgname=dolphinos-calamares
 pkgver=3.2.62
 pkgrel=2
 pkgdesc='Distribution-independent installer framework (development version)'
-_repo_name=DolphinOS-calamares
+_repo_name=dolphinos-calamares
 arch=('i686' 'x86_64')
 license=(GPL)
-url="https://github.com/DolphinOS-Development/${_repo_name}.git"
+url="https://gitlab.com/dolphinos-development/${_repo_name}.git"
 license=('LGPL')
 conflicts=('calamares' 'calamares-dev')
 provides=('calamares' 'calamares-dev')
@@ -19,7 +19,7 @@ optdepends=('ckbcomp')
 makedepends=('ninja' 'extra-cmake-modules' 'qt5-tools' 'qt5-translations' 'git' 'boost' 'python')
 
 source=(
-	"git+https://github.com/DolphinLNXOS/${_repo_name}.git"
+	"git+https://gitlab.com/dolphinos-development/${_repo_name}.git"
     "49-nopassword-calamares.rules"
 )
 sha256sums=(

@@ -3,8 +3,8 @@
 pkgname=dolphinos-dolphin-data
 pkgver=0.1
 pkgrel=1
-_repo_name=DolphinOS-DolphinData 
-url="https://github.com/DolphinOS-Development/${_repo_name}.git"
+_repo_name=dolphinos-dolphindata 
+url="https://gitlab.com/dolphinos-development/${_repo_name}.git"
 pkgdesc='Data needed for Dolphin emu, like configs, FW, etc'
 arch=('any')
 install=$pkgname.install

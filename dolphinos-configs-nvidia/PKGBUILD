@@ -4,7 +4,7 @@ pkgname=dolphinos-configs
 pkgver=0.1
 pkgrel=1
 _repo_name=dolphinos-configs
-url="https://gitlab.com/dolphinos-development/${_repo_name}.git"
+url="https://gitlab.com/dolphinos-development/${_repo_name}.git#branch=nvidia"
 pkgdesc='DolphinOS configuration files'
 arch=('any')
 license=('GPL3')
