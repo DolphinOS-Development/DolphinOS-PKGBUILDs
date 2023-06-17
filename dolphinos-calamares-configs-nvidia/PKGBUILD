@@ -1,0 +1,38 @@
+# Maintainer: JesusXD88
+
+pkgname=dolphinos-calamares-configs-nvidia
+pkgdesc='DolphinOS calamares configuration files and branding NVIDIA Version'
+pkgver=0.1
+pkgrel=1
+_repo_name=DolphinOS-calamares-configs
+url="https://github.com/DolphinOS-Development/${_repo_name}.git#branch=nvidia"
+arch=('any')
+license=('GPL3')
+source=("git+$url")
+makedepends=('git')
+
+sha256sums=('SKIP')
+
+_date=$(date +%Y.%m.%d)
+
+pkgver() {
+    cd "${srcdir}/${_repo_name}"
+    ( set -o pipefail
+    git describe --long --abbrev=7 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
+    )
+}
+
+prepare() {
+    # set date for calamares_branding
+    sed -i "$srcdir/${_repo_name}/calamares/branding/DolphinOS/branding.desc" \
+    -e "s|^\(    version:[ ]*\).*$|\1$_date|" \
+    -e "s|^\(    shortVersion:[ ]*\).*$|\1$_date|"
+
+    #chmod +x "$srcdir/${_repo_name}-${pkgver}/calamares/scripts/"{cleaner_script.sh,chrooted_cleaner_script.sh,update-mirrorlist,pacstrap_calamares}
+}
+
+package() {
+    install -dm 755 "$pkgdir/etc/calamares"
+    cp -r --no-preserve=ownership "$srcdir/${_repo_name}/calamares" "$pkgdir/etc/"
+}

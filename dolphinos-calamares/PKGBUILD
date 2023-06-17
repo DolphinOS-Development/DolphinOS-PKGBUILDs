@@ -1,0 +1,66 @@
+# Maintainer: JesusXD88
+
+pkgname=dolphinos-calamares
+pkgver=3.2.62
+pkgrel=2
+pkgdesc='Distribution-independent installer framework (development version)'
+_repo_name=DolphinOS-calamares
+arch=('i686' 'x86_64')
+license=(GPL)
+url="https://github.com/DolphinOS-Development/${_repo_name}.git"
+license=('LGPL')
+conflicts=('calamares' 'calamares-dev')
+provides=('calamares' 'calamares-dev')
+replaces=('calamares-dev')
+depends=('kconfig' 'kcoreaddons' 'kiconthemes' 'ki18n' 'kio' 'solid' 'yaml-cpp' 'kpmcore>=4.1.0'
+         'boost-libs' 'hwinfo' 'qt5-svg' 'polkit-qt5' 'gtk-update-icon-cache' 'plasma-framework'
+         'qt5-xmlpatterns' 'squashfs-tools' 'libpwquality' 'appstream-qt') # 'pythonqt>=3.2')
+optdepends=('ckbcomp')
+makedepends=('ninja' 'extra-cmake-modules' 'qt5-tools' 'qt5-translations' 'git' 'boost' 'python')
+
+source=(
+	"git+https://github.com/DolphinLNXOS/${_repo_name}.git"
+    "49-nopassword-calamares.rules"
+)
+sha256sums=(
+	'SKIP'
+    'SKIP'
+)
+
+pkgver() {
+    cd "${srcdir}/${_repo_name}"
+    ( set -o pipefail
+    git describe --long --abbrev=7 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
+    )
+}
+
+prepare() {
+	cd ${srcdir}/${_repo_name}
+	sed -i -e 's/"Install configuration files" OFF/"Install configuration files" ON/' CMakeLists.txt
+}
+
+
+build() {
+	cd ${srcdir}/${_repo_name}
+
+        _cpuCount=$(grep -c -w ^processor /proc/cpuinfo)
+
+        cmake -S . -Bbuild \
+              -GNinja \
+              -DCMAKE_BUILD_TYPE=Release \
+              -DCMAKE_INSTALL_PREFIX=/usr \
+              -DCMAKE_INSTALL_LIBDIR=lib \
+              -DWITH_PYTHONQT:BOOL=ON \
+              -DBoost_NO_BOOST_CMAKE=ON \
+              -DSKIP_MODULES="dummyprocess dummypython dummycpp \
+                              dummypythonqt services-openrc"      
+        cmake --build build --parallel $_cpuCount
+}
+
+package() {
+	cd ${srcdir}/DolphinOS-calamares/build
+	DESTDIR="${pkgdir}" cmake --build . --target install
+    install -Dm644 "${srcdir}/49-nopassword-calamares.rules" "${pkgdir}/etc/polkit-1/rules.d/49-nopassword-calamares.rules"
+    chmod 750 "${pkgdir}/etc/polkit-1/rules.d"
+}   

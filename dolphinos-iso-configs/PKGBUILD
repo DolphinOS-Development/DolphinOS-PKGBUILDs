@@ -1,0 +1,29 @@
+# Maintainer: JesusXD88
+
+pkgname=dolphinos-iso-configs
+pkgver=0.1
+pkgrel=1
+_repo_name=DolphinOS-ISO-configs
+url="https://github.com/DolphinOS-Development/${_repo_name}.git"
+pkgdesc='DolphinOS ISO configuration files'
+arch=('any')
+license=('GPL3')
+source=("git+$url")
+makedepends=('git')
+
+sha256sums=('SKIP')
+
+_date=$(date +%Y.%m.%d)
+
+pkgver() {
+    cd "${srcdir}/${_repo_name}"
+    ( set -o pipefail
+    git describe --long --abbrev=7 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
+    )
+}
+
+package() {
+    install -dm 750 "$pkgdir/root"
+    cp -r --no-preserve=ownership "$srcdir/${_repo_name}/root" "$pkgdir"
+}

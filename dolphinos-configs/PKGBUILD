@@ -1,0 +1,42 @@
+# Maintainer: JesusXD88
+
+pkgname=dolphinos-configs
+pkgver=0.1
+pkgrel=1
+_repo_name=DolphinOS-configs
+url="https://github.com/DolphinOS-Development/${_repo_name}.git"
+pkgdesc='DolphinOS configuration files'
+arch=('any')
+license=('GPL3')
+install=$pkgname.install
+source=("git+$url")
+makedepends=('git')
+
+sha256sums=('SKIP')
+
+_date=$(date +%Y.%m.%d)
+
+pkgver() {
+    cd "${srcdir}/${_repo_name}"
+    ( set -o pipefail
+    git describe --long --abbrev=7 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
+    )
+}
+
+backup=("home/dolphinos/.bash_profile")
+
+package() {
+    install -dm755 "$pkgdir/etc/pacman.d/hooks"
+    cp -r --no-preserve=ownership "$srcdir/${_repo_name}/etc/pacman.d/hooks" "$pkgdir/etc/pacman.d/hooks"
+    install -dm755 "$pkgdir/usr/share/libalpm/scripts"
+    cp --no-preserve=ownership "$srcdir/${_repo_name}/usr/share/libalpm/scripts/grub-mkconfig" "$pkgdir/usr/share/libalpm/scripts/grub-mkconfig"
+    chmod +x "$pkgdir/usr/share/libalpm/scripts/grub-mkconfig"
+    install -dm755 "$pkgdir/etc/sysctl.d"
+    cp --no-preserve=ownership "$srcdir/${_repo_name}/etc/sysctl.d/20-quiet-printk.conf" "$pkgdir/etc/sysctl.d/20-quiet-printk.conf"
+    install -dm755 "$pkgdir/etc/systemd/system/getty@tty1.service.d"
+    cp --no-preserve=ownership "$srcdir/${_repo_name}/etc/systemd/system/getty@tty1.service.d/skip-prompt.conf" "$pkgdir/etc/systemd/system/getty@tty1.service.d/skip-prompt.conf"
+    install -dm700 "$pkgdir/home/dolphinos"
+    cp -r --no-preserve=ownership "$srcdir/${_repo_name}/home/dolphinos" "$pkgdir/home"
+    chown -R 1000:1000 "$pkgdir/home/dolphinos"
+}

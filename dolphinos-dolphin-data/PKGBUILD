@@ -1,0 +1,41 @@
+# Maintainer: JesusXD88
+
+pkgname=dolphinos-dolphin-data
+pkgver=0.1
+pkgrel=1
+_repo_name=DolphinOS-DolphinData 
+url="https://github.com/DolphinOS-Development/${_repo_name}.git"
+pkgdesc='Data needed for Dolphin emu, like configs, FW, etc'
+arch=('any')
+install=$pkgname.install
+source=(
+    "git+$url"
+    "dec.bin"
+)
+makedepends=('git')
+depends=('openssl')
+
+sha256sums=(
+    'SKIP'
+    'SKIP'    
+)
+
+_date=$(date +%Y.%m.%d)
+
+pkgver() {
+    cd "${srcdir}/${_repo_name}"
+    ( set -o pipefail
+    git describe --long --abbrev=7 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
+    )
+}
+
+package() {
+    install -dm755 "$pkgdir/home/dolphinos/.local/share/dolphin-emu"
+    chown -R 1000:1000 "$pkgdir/home/dolphinos/.local"
+    cp -r --no-preserve=ownership "${srcdir}/${_repo_name}/data/system.tar.gz.enc" "$pkgdir/home/dolphinos/.local/share/dolphin-emu"
+    cp --no-preserve=ownership "${srcdir}/dec.bin" "$pkgdir/home/dolphinos/.local/share/dolphin-emu"
+    install -dm755 "$pkgdir/home/dolphinos/.config/dolphin-emu"
+    cp -r --no-preserve=ownership "${srcdir}/${_repo_name}/config/dolphin-emu" "$pkgdir/home/dolphinos/.config"
+    chown -R 1000:1000 "$pkgdir/home/dolphinos/.config/dolphin-emu"
+}
