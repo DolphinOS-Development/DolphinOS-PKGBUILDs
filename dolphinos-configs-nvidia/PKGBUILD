@@ -29,6 +29,8 @@ backup=("home/dolphinos/.bash_profile")
 package() {
     install -dm755 "$pkgdir/etc/pacman.d/hooks"
     cp -r --no-preserve=ownership "$srcdir/${_repo_name}/etc/pacman.d/hooks" "$pkgdir/etc/pacman.d/hooks"
+    install -dm755 "$pkgdir/etc/X11/xorg.conf.d"
+    cp --no-preserve=ownership "$srcdir/${_repo_name}/etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf" "$pkgdir/etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf"
     install -dm755 "$pkgdir/usr/share/libalpm/scripts"
     cp --no-preserve=ownership "$srcdir/${_repo_name}/usr/share/libalpm/scripts/grub-mkconfig" "$pkgdir/usr/share/libalpm/scripts/grub-mkconfig"
     chmod +x "$pkgdir/usr/share/libalpm/scripts/grub-mkconfig"
