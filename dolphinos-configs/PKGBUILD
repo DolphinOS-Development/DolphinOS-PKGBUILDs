@@ -1,6 +1,6 @@
 # Maintainer: JesusXD88
 
-pkgname=dolphinos-configs-nvidia
+pkgname=dolphinos-configs
 pkgver=0.1
 pkgrel=1
 _repo_name=dolphinos-configs
