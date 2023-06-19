@@ -11,6 +11,7 @@ source=(
     "git+$url"
 )
 makedepends=('git')
+depends=('python-flask')
 
 sha256sums=(
     'SKIP'    
