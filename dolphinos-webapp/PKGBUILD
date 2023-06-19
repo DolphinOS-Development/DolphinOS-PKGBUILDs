@@ -12,6 +12,7 @@ source=(
 )
 makedepends=('git')
 depends=('python-flask')
+optdepends=('python-nmcli')
 
 sha256sums=(
     'SKIP'    
