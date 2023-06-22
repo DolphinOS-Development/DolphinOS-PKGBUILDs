@@ -1,0 +1,11 @@
+post_install() {
+    lspci -k | grep vmwgfx
+    result=$?
+    if [ $result -eq 0 ]; then
+        sed -i 's/GFXBackend = Vulkan/GFXBackend = OGL/' /home/dolphinos/.config/dolphin-emu/Dolphin.ini
+    fi
+}
+
+post_upgrade() {
+    post_install
+}
