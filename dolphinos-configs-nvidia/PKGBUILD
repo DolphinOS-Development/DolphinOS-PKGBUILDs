@@ -36,6 +36,8 @@ package() {
     chmod +x "$pkgdir/usr/share/libalpm/scripts/grub-mkconfig"
     install -dm755 "$pkgdir/etc/sysctl.d"
     cp --no-preserve=ownership "$srcdir/${_repo_name}/etc/sysctl.d/20-quiet-printk.conf" "$pkgdir/etc/sysctl.d/20-quiet-printk.conf"
+    install -dm755 "$pkgdir/etc/udisks2"
+    cp --no-preserve=ownership "$srcdir/${_repo_name}/etc/udisks2/mount_options.conf" "$pkgdir/etc/udisks2/mount_options.conf"
     install -dm755 "$pkgdir/etc/systemd/system/getty@tty1.service.d"
     cp --no-preserve=ownership "$srcdir/${_repo_name}/etc/systemd/system/getty@tty1.service.d/skip-prompt.conf" "$pkgdir/etc/systemd/system/getty@tty1.service.d/skip-prompt.conf"
     install -dm700 "$pkgdir/home/dolphinos"
