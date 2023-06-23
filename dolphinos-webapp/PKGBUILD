@@ -7,7 +7,6 @@ _repo_name=dolphinos-webapp
 url="https://gitlab.com/dolphinos-development/${_repo_name}.git"
 pkgdesc='Data needed for Dolphin emu, like configs, FW, etc'
 arch=('any')
-install=$pkgname.install
 source=(
     "git+$url"
 )

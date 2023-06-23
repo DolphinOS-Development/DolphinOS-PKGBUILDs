@@ -5,6 +5,11 @@ post_install() {
     rm system.tar.gz.enc
     rm system.tar.gz
     chown -R 1000:1000 /home/dolphinos/.local
+    lspci -k | grep vmwgfx
+    result=$?
+    if [ $result -eq 0 ]; then
+        sed -i 's/GFXBackend = Vulkan/GFXBackend = OGL/' /home/dolphinos/.config/dolphin-emu/Dolphin.ini
+    fi
 }
 
 post_upgrade() {
