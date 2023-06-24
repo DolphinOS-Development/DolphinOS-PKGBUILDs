@@ -59,7 +59,7 @@ build() {
 }
 
 package() {
-	cd ${srcdir}/DolphinOS-calamares/build
+	cd ${srcdir}/${_repo_name}/build
 	DESTDIR="${pkgdir}" cmake --build . --target install
     install -Dm644 "${srcdir}/49-nopassword-calamares.rules" "${pkgdir}/etc/polkit-1/rules.d/49-nopassword-calamares.rules"
     chmod 750 "${pkgdir}/etc/polkit-1/rules.d"
