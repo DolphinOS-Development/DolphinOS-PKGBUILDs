@@ -1,0 +1,22 @@
+pkgname=python-nmcli
+_name=nmcli
+pkgver=1.2.0
+pkgrel=1
+pkgdesc='nmcli is a python wrapper library for the network-manager cli client.'
+arch=('any')
+url="https://github.com/ushiboy/nmcli"
+license=('MIT')
+depends=('networkmanager')
+makedepends=('python-build' 'python-installer' 'python-setuptools' 'python-wheel')
+source=("https://files.pythonhosted.org/packages/source/${_name::1}/$_name/$_name-$pkgver.tar.gz")
+sha256sums=('333929fc6633e9d05b5ffcb26aa0c788426f15bc48fa1fe35fff74913a1fc031')
+
+build() {
+  cd "$_name-$pkgver"
+  python -m build --wheel --no-isolation
+}
+
+package() {
+  cd "$_name-$pkgver"
+  python -m installer --destdir="$pkgdir" dist/*.whl
+}
