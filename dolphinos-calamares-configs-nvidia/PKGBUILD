@@ -4,8 +4,8 @@ pkgname=dolphinos-calamares-configs-nvidia
 pkgdesc='DolphinOS calamares configuration files and branding NVIDIA Version'
 pkgver=0.1
 pkgrel=1
-_repo_name=dolphinos-calamares-configs
-url="https://gitlab.com/dolphinos-development/${_repo_name}.git#branch=nvidia"
+_repo_name=DolphinOS-calamares-configs
+url="https://github.com/DolphinOS-Development/${_repo_name}.git#branch=nvidia"
 arch=('any')
 license=('GPL3')
 source=("git+$url")

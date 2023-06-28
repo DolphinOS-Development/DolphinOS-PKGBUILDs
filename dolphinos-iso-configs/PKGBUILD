@@ -3,8 +3,8 @@
 pkgname=dolphinos-iso-configs
 pkgver=0.1
 pkgrel=1
-_repo_name=dolphinos-iso-configs
-url="https://gitlab.com/dolphinos-development/${_repo_name}.git"
+_repo_name=DolphinOS-ISO-configs
+url="https://github.com/DolphinOS-Development/${_repo_name}.git"
 pkgdesc='DolphinOS ISO configuration files'
 arch=('any')
 license=('GPL3')
