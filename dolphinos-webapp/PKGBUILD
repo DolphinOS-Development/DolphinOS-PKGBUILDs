@@ -1,0 +1,36 @@
+# Maintainer: JesusXD88
+
+pkgname=dolphinos-webapp
+pkgver=0.1
+pkgrel=1
+_repo_name=dolphinos-webapp
+url="https://gitlab.com/dolphinos-development/${_repo_name}.git"
+pkgdesc='Data needed for Dolphin emu, like configs, FW, etc'
+arch=('any')
+source=(
+    "git+$url"
+)
+makedepends=('git')
+depends=('python-flask')
+optdepends=('python-nmcli')
+
+sha256sums=(
+    'SKIP'    
+)
+
+_date=$(date +%Y.%m.%d)
+
+pkgver() {
+    cd "${srcdir}/${_repo_name}"
+    ( set -o pipefail
+    git describe --long --abbrev=7 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
+    )
+}
+
+package() {
+    install -dm755 "$pkgdir/usr/bin"
+    cp --no-preserve=ownership ${srcdir}/${_repo_name}/dolphinos-webapp "$pkgdir/usr/bin"
+    install -dm755 "$pkgdir/usr/share/dolphinos-webapp"
+    cp -r --no-preserve=ownership ${srcdir}/${_repo_name}/src/* "$pkgdir/usr/share/dolphinos-webapp"
+}

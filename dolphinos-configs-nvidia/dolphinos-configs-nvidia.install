@@ -1,0 +1,7 @@
+pre_install() {
+	rm /home/dolphinos/.bash_profile
+}
+
+pre_upgrade() {
+    pre_install
+}
