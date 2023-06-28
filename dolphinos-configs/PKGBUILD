@@ -28,7 +28,7 @@ backup=("home/dolphinos/.bash_profile")
 
 package() {
     install -dm755 "$pkgdir/etc/pacman.d/hooks"
-    cp -r --no-preserve=ownership "$srcdir/${_repo_name}/etc/pacman.d/hooks" "$pkgdir/etc/pacman.d/hooks"
+    cp -r --no-preserve=ownership $srcdir/${_repo_name}/etc/pacman.d/hooks/* "$pkgdir/etc/pacman.d/hooks"
     install -dm755 "$pkgdir/usr/share/libalpm/scripts"
     cp --no-preserve=ownership "$srcdir/${_repo_name}/usr/share/libalpm/scripts/grub-mkconfig" "$pkgdir/usr/share/libalpm/scripts/grub-mkconfig"
     chmod +x "$pkgdir/usr/share/libalpm/scripts/grub-mkconfig"
