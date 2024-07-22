@@ -12,10 +12,9 @@ license=('LGPL')
 conflicts=('calamares' 'calamares-dev')
 provides=('calamares' 'calamares-dev')
 replaces=('calamares-dev')
-depends=('yaml-cpp' 'kpmcore>=4.1.0'
-         'hwinfo' 'gtk-update-icon-cache'
-         'squashfs-tools' 'libpwquality'
-         'efibootmgr' 'icu') # 'pythonqt>=3.2')
+depends=('kconfig' 'kcoreaddons' 'kiconthemes' 'ki18n' 'kio' 'solid' 'yaml-cpp' 'kpmcore>=4.1.0'
+         'boost-libs' 'hwinfo' 'qt5-svg' 'polkit-qt5' 'gtk-update-icon-cache' 'efibootmgr'
+         'qt5-xmlpatterns' 'squashfs-tools' 'libpwquality' 'appstream-qt') # 'pythonqt>=3.2')
 optdepends=('ckbcomp')
 makedepends=('ninja' 'extra-cmake-modules' 'qt5-tools' 'qt5-translations' 'git' 'boost' 'python')
 
