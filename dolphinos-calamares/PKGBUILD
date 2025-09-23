@@ -64,7 +64,7 @@ build() {
 }
 
 package() {
-	cd ${srcdir}/${_repo_name}/build
+	cd ${srcdir}/${_repo_name}
 	DESTDIR="${pkgdir}" cmake --install build
     install -Dm644 "${srcdir}/49-nopassword-calamares.rules" "${pkgdir}/etc/polkit-1/rules.d/49-nopassword-calamares.rules"
     chmod 750 "${pkgdir}/etc/polkit-1/rules.d"
