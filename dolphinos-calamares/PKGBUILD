@@ -1,29 +1,32 @@
 # Maintainer: JesusXD88
 
 pkgname=dolphinos-calamares
-pkgver=3.2.62
-pkgrel=2
+pkgver=3.4.0.9503fe5
+pkgrel=3
 pkgdesc='Distribution-independent installer framework (development version)'
 _repo_name=DolphinOS-calamares
 arch=('i686' 'x86_64')
 license=(GPL)
 url="https://github.com/DolphinOS-Development/${_repo_name}.git"
-license=('LGPL')
-conflicts=('calamares' 'calamares-dev')
-provides=('calamares' 'calamares-dev')
-replaces=('calamares-dev')
-depends=('kconfig' 'kcoreaddons' 'kiconthemes' 'ki18n' 'kio' 'solid' 'yaml-cpp' 'kpmcore>=4.1.0'
-         'boost-libs' 'hwinfo' 'qt5-svg' 'polkit-qt5' 'gtk-update-icon-cache' 'efibootmgr'
-         'qt5-xmlpatterns' 'squashfs-tools' 'libpwquality' 'appstream-qt') # 'pythonqt>=3.2')
+license=('GPL-3.0-or-later')
+conflicts=('calamares' 'calamares-git')
+provides=('calamares' 'calamares-git')
+replaces=('calamares-git')
+depends=('kconfig' 'kcoreaddons' 'kiconthemes' 'ki18n' 'kio' 'solid' 'yaml-cpp' 'kpmcore'
+         'boost-libs' 'hwinfo' 'qt6-svg' 'polkit-qt6' 'efibootmgr'
+         'squashfs-tools' 'libpwquality' 'python' 'python-jsonschema' 
+         'python-yaml' 'solid')
 optdepends=('ckbcomp')
-makedepends=('ninja' 'extra-cmake-modules' 'qt5-tools' 'qt5-translations' 'qt5-quickcontrols' 'git' 'boost' 'python')
+makedepends=('ninja' 'extra-cmake-modules' 'qt6-tools' 'qt6-translations' 'git' 'boost' 'python')
 
 source=(
 	"git+https://github.com/DolphinOS-Development/${_repo_name}.git"
     "49-nopassword-calamares.rules"
+    "yay-support.patch"
 )
 sha256sums=(
 	'SKIP'
+    'SKIP'
     'SKIP'
 )
 
@@ -37,6 +40,7 @@ pkgver() {
 
 prepare() {
 	cd ${srcdir}/${_repo_name}
+    git apply ../yay-support.patch
 	sed -i -e 's/"Install configuration files" OFF/"Install configuration files" ON/' CMakeLists.txt
 }
 
@@ -51,16 +55,17 @@ build() {
               -DCMAKE_BUILD_TYPE=Release \
               -DCMAKE_INSTALL_PREFIX=/usr \
               -DCMAKE_INSTALL_LIBDIR=lib \
+              -DWITH_QT6=ON \
               -DWITH_PYTHONQT:BOOL=ON \
-              -DBoost_NO_BOOST_CMAKE=ON \
               -DSKIP_MODULES="dummyprocess dummypython dummycpp \
-                              dummypythonqt services-openrc"      
+                              dummypythonqt services-openrc dracut dracutlukscfg" \
+              -Wno-dev      
         cmake --build build --parallel $_cpuCount
 }
 
 package() {
 	cd ${srcdir}/${_repo_name}/build
-	DESTDIR="${pkgdir}" cmake --build . --target install
+	DESTDIR="${pkgdir}" cmake --install build
     install -Dm644 "${srcdir}/49-nopassword-calamares.rules" "${pkgdir}/etc/polkit-1/rules.d/49-nopassword-calamares.rules"
     chmod 750 "${pkgdir}/etc/polkit-1/rules.d"
 }   
